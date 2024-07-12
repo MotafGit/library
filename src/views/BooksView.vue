@@ -4,7 +4,7 @@ import NewBookForm from '../components/NewBookForm.vue'
 import ShowBookDetails from '../components/ShowBookDetails.vue'
 
 import StarRating from 'vue-dynamic-star-rating'
-import { ref, computed, watch, onUpdated } from 'vue'
+import { ref, computed, watch, onUpdated, provide } from 'vue'
  import { RouterLink, RouterView } from 'vue-router'
 
 const search = ref ('Search')
@@ -15,7 +15,8 @@ const cleansSearch = () => {
     }
 }
 
-
+const injected = ref ("injected");
+provide ('injected', injected);
 const testeName = ref ('');
 const starStyle = {
             fullStarColor: '#ed8a19',
@@ -94,7 +95,7 @@ const bookList = ref( [
         name: "Asterix and Cleopatra",
         author: "René Goscinny",
         image: "https://asterix.com/wp-content/uploads/2017/06/alb06gb.png",
-        genre: "Epic Fantasy",
+        genre: "Comedy",
         reviewScore: 3.7,
         id: 6,
         intro:"To impress Julius Caesar, Queen Cleopatra promises to build the Roman Emperor a magnificent palace in just three months. Of course, Asterix has to get involved. By the time his feisty group from Gaul have finished, they’ve outwitted the Roman army, too."
@@ -138,10 +139,13 @@ const bookList = ref( [
                     intro:books.intro,
                     image: books.image,
                     reviewScore: books.reviewScore,
-                   
+                    booksObj:  JSON.stringify({...books})
                         
                     
                 } }">
+
+                
+
                 <div class="clickBook">
                   
                         <div class="text-center text-nowrap titulo" style="max-width:135px;overflow:hidden">{{books.name}}</div>

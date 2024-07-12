@@ -1,6 +1,8 @@
 import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
 import BooksView from '../views/BooksView.vue'
 import ShowBookDetails from '../components/ShowBookDetails.vue';
+import GenreDetails from '../components/GenreDetails.vue';
+
 import ShowBookView from '../views/ShowBookView.vue';
 
 import Main from '../main.vue'
@@ -22,11 +24,18 @@ const router = createRouter({
       component: BooksView
     },
     {
-      path: '/showBooks/:id/:name/:image/:reviewScore/:author/:genre/:intro',
+      path: '/showBooks/:id/:name/:image/:reviewScore/:author/:genre/:intro/:booksObj',
       name: 'showBookDetails',
       component: ShowBookDetails,
       props:true
     },
+    {
+      path: '/genres/:genre',
+      name: 'GenreDetails',
+      component: GenreDetails,
+      props:true
+    },
+
    // {
      // path: '/about',
       //name: 'about',
