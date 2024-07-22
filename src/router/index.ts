@@ -24,13 +24,13 @@ const router = createRouter({
       component: BooksView
     },
     {
-      path: '/showBooks/:id/:name/:image/:reviewScore/:author/:genre/:intro/:booksObj',
+      path: '/showBooks/:booksObj',
       name: 'showBookDetails',
       component: ShowBookDetails,
       props:true
     },
     {
-      path: '/genres/:genre',
+      path: '/genres/:booksObj1',
       name: 'GenreDetails',
       component: GenreDetails,
       props:true

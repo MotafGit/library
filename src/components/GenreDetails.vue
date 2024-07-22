@@ -2,18 +2,23 @@
 
 
 import Navbar from '../components/Navbar.vue'
-import { ref, computed, watch, onUpdated, inject } from 'vue'
+import { ref, computed, watch, onUpdated, inject, watchEffect } from 'vue'
 
 
 const description = ref ('')
-const injected = inject('injected')
 
 const props = defineProps ({
-    genre: {
+    booksObj1: {
       type: String,
       required: true
     },
 })
+
+const books = ref ([{}]);
+const filteredBooks = ref ([{}]);
+watchEffect(() => {
+    books.value = JSON.parse(props.booksObj1);
+});
 
 
 
@@ -87,9 +92,17 @@ watch(props.genre, (currentValue, oldValue) => {
 
 const genreDescr = computed ( () => {
 
-    const found = genresDescription.value.find(( element) => element.type === props.genre)
+    const found = genresDescription.value.find(( element) => element.type === books.value.genre)
     return found?.description
 })
+
+watch(books.value, (currentValue, oldValue) => {
+   // books.forEach((element) => filteredBooks.value.push(element) )
+})
+
+const verifica = () => {
+    filteredBooks.value.forEach((el) => console.log (el))
+}
 
 
 
@@ -104,24 +117,34 @@ const genreDescr = computed ( () => {
         {{ genreDescr }}
     </div>
     <div class="pt-5 pl-5">
-        Others {{ props.genre }} you might like
+        Others {{ books.genre }} you might like
     </div>
-   
-        <div class="pt-5 grid md:grid-cols-3 sm:grid grid-cols-1 justify-items-center gap-6"  v-for="(genres, index) in genresDescription">
-             <div v-if="genres.type === props.genre" v-for="child in genres.bookList" class="bookFromGrid">
-                
-                    <img class="" style="width:inherit; height:inherit" :src= child.image />
-              
-             </div>
+
+    <div class="pt-5 grid md:grid-cols-3 sm:grid grid-cols-1 justify-items-center gap-6"  v-for="(genres, index) in genresDescription">
+        <div v-if="genres.type === books.genre" v-for="child in genres.bookList" class="bookFromGrid">
+           
+
+            <router-link 
+              :to="{
+                name: 'showBookDetails', 
+                params: { 
+                    booksObj:  JSON.stringify({...books})
+                        
+                    
+                } }">
+               <img class="" style="width:inherit; height:inherit" :src= child.image />
+
+                </router-link> 
+         
+        </div>
 
 
 
-    </div>
-    <div>
-        <button @click="console.log(injected)">
-            show inject
-        </button>
-    </div>
+</div> 
+
+
+    
+
 
 
 

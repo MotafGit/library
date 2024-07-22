@@ -2,6 +2,7 @@
 import Navbar from '../components/Navbar.vue'
 import NewBookForm from '../components/NewBookForm.vue'
 import ShowBookDetails from '../components/ShowBookDetails.vue'
+import debounce from 'lodash.debounce'
 
 import StarRating from 'vue-dynamic-star-rating'
 import { ref, computed, watch, onUpdated, provide } from 'vue'
@@ -15,8 +16,9 @@ const cleansSearch = () => {
     }
 }
 
-const injected = ref ("injected");
-provide ('injected', injected);
+const filterByName = ref ([{}])
+
+const testArray = ref ([])
 const testeName = ref ('');
 const starStyle = {
             fullStarColor: '#ed8a19',
@@ -42,6 +44,50 @@ const addBook = (obj) => {
     //console.log(bookList)
     close();
 
+}
+
+
+watch(search, debounce(() => {
+    console.log (search.value)
+    
+    bookList.value.forEach(element => { 
+        console.log (element.name)
+        if (element.name.includes(search.value)){
+            console.log ("entrou ca")
+            filterByName.value.push(element)
+    }
+
+    
+    })
+
+}, 500));
+
+
+    
+
+
+
+
+/* const genreDescr = computed ( () => {
+
+bookList.value.forEach(element => { 
+    testArray.value.push(element?.author); 
+})
+
+testArray.value.forEach(el => {
+    if (el.includes(search.value)){
+        filterByName.value.push(el)
+    }
+})
+    return filterByName
+});*/
+
+
+const checkPrime = () => {
+  //  bookList.value.forEach(element => { testArray.value.push(element?.author) })
+
+    //testArray.value.forEach ((el) => console.log(el))
+    filterByName.value.forEach((el) => console.log(el));
 }
 
 
@@ -126,19 +172,12 @@ const bookList = ref( [
     </div>
     <div>
       
-        <div class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" style="z-index:500">
+        <div v-if="search == 'Search' || search == '' " class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" style="z-index:500">
             <div class="" v-for="books in bookList" :key="books.id" >
               <router-link 
               :to="{
                 name: 'showBookDetails', 
                 params: { 
-                    id: books.id,
-                    name: books.name,
-                    author: books.author,
-                    genre: books.genre,
-                    intro:books.intro,
-                    image: books.image,
-                    reviewScore: books.reviewScore,
                     booksObj:  JSON.stringify({...books})
                         
                     
@@ -159,7 +198,15 @@ const bookList = ref( [
             </div>
             
         </div>
+        <div v-else>
+            <div></div>
+        </div>
        
+    </div>
+    <div>
+        <button @click="checkPrime()">
+            abcsdds
+        </button>
     </div>
 
 </template>

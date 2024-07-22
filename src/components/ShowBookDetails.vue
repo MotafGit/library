@@ -1,40 +1,13 @@
 <script lang="ts" setup>
 
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, watchEffect } from 'vue'
 
 
 import StarRating from 'vue-dynamic-star-rating';
 import Navbar from '../components/Navbar.vue'
 
 const props = defineProps ({
-    id: {
-      type: String,
-      required: true
-    },
-   name: {
-    type: String,
-    required: true
-   },
-   author: {
-    type: String,
-    required: true
-   },
-   genre: {
-    type: String,
-    required: true
-   },
-   intro: {
-    type: String,
-    required: true
-   },
-   image: {
-    type: String,
-    required: true
-   },
-   reviewScore: {
-    type: String,
-    required: true
-   },
+
    booksObj:{
     type: String,
     required: true,
@@ -45,9 +18,8 @@ const expandIntro = ref (120);
 const overflowIntro = ref ('hidden');
 const hideButton = ref (false)
 const marginIntro = ref (0)
-const verifica = () => {
-    console.log(props?.name)
-}
+
+const books = ref ({})
 
 const starStyle = {
             fullStarColor: '#ed8a19',
@@ -65,6 +37,11 @@ const addToBasket = () => {
     console.log ("por fazer")
 }
 
+
+watchEffect(() => {
+    books.value = JSON.parse(props.booksObj)
+});
+
 </script>
 
 <template>
@@ -76,7 +53,7 @@ const addToBasket = () => {
                 <div class="flex flex-col items-end leftSide w-1/3" style="">
                     <div class="flex flex-col items-center"> 
                     <div class="bookCover">
-                        <img style="width:inherit; height:inherit" :src= props.image />
+                        <img style="width:inherit; height:inherit" :src= books.image />
                     </div>
                     <div class="addToWish pt-2 text-center" style="width:180px">
                         <button class="wishButton" @click="addWishList()"> Add to my wish list  </button>
@@ -85,29 +62,29 @@ const addToBasket = () => {
                         <button class="addBasketButton" @click="addToBasket()"> Add to Basket</button>
                     </div>
                     <div class="starRating pt-2">
-                        <star-rating :rating="parseInt(props.reviewScore)" :starStyle="starStyle"></star-rating>
+                        <star-rating :rating="parseInt(books.reviewScore)" :starStyle="starStyle"></star-rating>
                     </div>
                 </div>
             </div>
                 <div class="flex flex-col  ml-20 rightSide w-1/2" style="">
-                    <div class="font-medium text-5xl"> {{ props.name}}</div>
-                    <div class="pt-5 text-2xl" style="font-weight:600"> By: {{props.author}}</div>
-                    <div v-if="hideButton == false" class="intro pt-5" :style="{height: expandIntro + 'px', overflow: overflowIntro}"> {{props.intro}}</div>
+                    <div class="font-medium text-5xl"> {{ books.name}}</div>
+                    <div class="pt-5 text-2xl" style="font-weight:600"> By: {{books.author}}</div>
+                    <div v-if="hideButton == false" class="intro pt-5" :style="{height: expandIntro + 'px', overflow: overflowIntro}"> {{books.intro}}</div>
                     <div v-if="hideButton == false" @click="expandIntro = 200; overflowIntro = 'unset'; hideButton = true; marginIntro= 70 " class="pl-5, font-medium">
                         <button>
                              Show more <span><font-awesome-icon :icon="['fas', 'angles-down']" /></span>
                         </button>
                     </div>
-                    <div v-if="hideButton == true" class="pt-4 font-semibold"> {{props.intro}} </div>
+                    <div v-if="hideButton == true" class="pt-4 font-semibold"> {{books.intro}} </div>
                     <div class="pt-4" >
                         Genres: 
                         <router-link
                         :to="{
                             name: 'GenreDetails',
                             params: {
-                            genre: props.genre,
+                            booksObj1: props.booksObj,
                          } }" >
-                        <span class="font-medium"> {{  props.genre }} </span>
+                        <span class="font-medium"> {{  books.genre }} </span>
                         </router-link>
                     </div>
 
@@ -117,9 +94,7 @@ const addToBasket = () => {
             </div>
        </div>
        <div>
-        <button @click="console.log(JSON.parse(props.booksObj))">
-            show
-        </button>
+     
        </div>
 
 </template>

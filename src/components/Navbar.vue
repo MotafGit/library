@@ -53,8 +53,8 @@ watch(windowY, (newValue, oldValue) => {
                         <RouterLink to="/books">Books</RouterLink>
                     </button>
                 </div>
-                <div>butao3</div>
-                <div>butao4</div>
+                <div>button3</div>
+                <div>button4</div>
             </div>
         </div>
 
