@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import Navbar from '../components/Navbar.vue'
-import NewBookForm from '../components/NewBookForm.vue'
-import ShowBookDetails from '../components/ShowBookDetails.vue'
+import Navbar from '@/components/Navbar.vue'
+import NewBookForm from '@/components/NewBookForm.vue'
+import ShowBookDetails from '@/components/ShowBookDetails.vue'
 import debounce from 'lodash.debounce'
 
-import StarRating from 'vue-dynamic-star-rating'
+import StarRating from 'vue-star-rating'
+
+
 import { ref, computed, watch, onUpdated, provide } from 'vue'
  import { RouterLink, RouterView } from 'vue-router'
 
@@ -20,12 +22,7 @@ const filterByName = ref ([{}])
 
 const testArray = ref ([])
 const testeName = ref ('');
-const starStyle = {
-            fullStarColor: '#ed8a19',
-            emptyStarColor: '#737373',
-            starWidth: 18,
-            starHeight: 20
-        }
+
 
 const close = () => {
     showNewBookMenu.value= false
@@ -191,7 +188,7 @@ const bookList = ref( [
                         <div class="booksBox">
                             <img style="width:inherit; height:inherit" :src= books.image />
                         </div>
-                        <div class="text-center pt-2" style=""> <star-rating :rating="books.reviewScore" :starStyle="starStyle"></star-rating></div>
+                        <div class="text-center" style=""> <star-rating :rating="books.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
                     
                 </div>
                 </router-link> 
@@ -214,6 +211,10 @@ const bookList = ref( [
 
 <style>
 
+
+.vue-star-rating-rating-text{
+    margin-top:7px;
+}
 /*
 
 
@@ -227,7 +228,7 @@ const bookList = ref( [
 
 .booksBox{
     height:180px;
-    width:135px;
+    width:145px;
     background-color: orange;
 
 }
@@ -239,6 +240,10 @@ const bookList = ref( [
 
 .clickBook:hover{
     cursor:pointer;
+}
+
+.clickBook{
+    text-align: -webkit-center;
 }
 
 </style>

@@ -3,7 +3,8 @@
 import { ref, computed, watch, watchEffect } from 'vue'
 
 
-import StarRating from 'vue-dynamic-star-rating';
+import StarRating from 'vue-star-rating'
+
 import Navbar from '../components/Navbar.vue'
 
 const props = defineProps ({
