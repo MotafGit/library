@@ -10,12 +10,13 @@ import StarRating from 'vue-star-rating'
 import { ref, computed, watch, onUpdated, provide } from 'vue'
  import { RouterLink, RouterView } from 'vue-router'
 
-const search = ref ('Search')
+const search = ref ('')
 const showNewBookMenu = ref (false)
+const selectFilter = ref ();
 const cleansSearch = () => {
-    if (search.value === "Search"){
+
         search.value = "";
-    }
+    
 }
 
 const filterByName = ref ([{}])
@@ -43,10 +44,18 @@ const addBook = (obj) => {
 
 }
 
+/* watch(search, (currentValue, oldValue) => {
+    if (search.value == 'Search' || search.value == ''){
+        filterByName.value.length = 0;
+    }
+    }); */ 
 
 watch(search, debounce(() => {
-    console.log (search.value)
     
+    filterByName.value.length = 0;
+    if ( search.value != '' ){
+        console.log ("entrou ca?????")
+        console.log(search.value)
     bookList.value.forEach(element => { 
         console.log (element.name)
         if (element.name.includes(search.value)){
@@ -55,9 +64,9 @@ watch(search, debounce(() => {
     }
 
     
-    })
+    })}
 
-}, 500));
+}, 2000));
 
 
     
@@ -85,6 +94,10 @@ const checkPrime = () => {
 
     //testArray.value.forEach ((el) => console.log(el))
     filterByName.value.forEach((el) => console.log(el));
+
+    console.log (filterByName.value.length)
+    console.log (filterByName.value)
+
 }
 
 
@@ -156,6 +169,13 @@ const bookList = ref( [
     </div>
     <div class="flex h-8" style="padding:1px; padding-top:9px;margin-bottom:9px ">
         <div class="sm:basis-1/12"></div>
+        <div>
+            Filter by
+        </div>
+        <div class="">
+            <select v-model="selectFilter"></select>
+        </div>
+        
         <div class="w-full">
             <input type="search" v-model="search" @click="cleansSearch()" class="rounded-lg searchBar w-full pl-2 border focus:border-2" style="border-color:black;" ></input>
         </div>
@@ -169,7 +189,7 @@ const bookList = ref( [
     </div>
     <div>
       
-        <div v-if="search == 'Search' || search == '' " class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" style="z-index:500">
+        <div v-if=" search == '' " class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" style="z-index:500">
             <div class="" v-for="books in bookList" :key="books.id" >
               <router-link 
               :to="{
@@ -195,8 +215,18 @@ const bookList = ref( [
             </div>
             
         </div>
-        <div v-else>
-            <div></div>
+        <div v-if=" search != '' && filterByName.length>0" class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+            <div v-for="b in filterByName">
+                <div v-if="b.name != null" class="clickBook">
+                  
+                    <div class="text-center text-nowrap titulo" style="max-width:135px;overflow:hidden">{{b.name}}</div>
+                    <div class="booksBox">
+                        <img style="width:inherit; height:inherit" :src= b.image />
+                    </div>
+                    <div class="text-center" style=""> <star-rating :rating="b.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
+                
+            </div>
+            </div>
         </div>
        
     </div>
