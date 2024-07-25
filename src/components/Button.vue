@@ -1,17 +1,29 @@
 <script setup lang="ts" >
-import { ref, computed, watch, reactive } from 'vue'
+import { ref, computed, watchEffect, reactive } from 'vue'
 
-defineProps({
-  message: String
+
+
+const props = defineProps({
+  message: String,
+  height: String
 })
+
+
+watchEffect(() => {
+    console.log(props.height)
+});
 
 </script>
 
 
 <template>
 
-    <div >
-        <button class="mainButton" style="">{{message}}</button>
+    <div class="" :style="{height:props.height+'px'}">
+        <button class="mainButton" :style="{ height:props.height+'px' }">
+            <div>
+                {{props.message}}
+            </div>
+        </button>
     </div>
 
 
@@ -21,12 +33,14 @@ defineProps({
 <style>
 
 .mainButton{
-    padding:2px;
+
     padding-left: 6px;
     padding-right: 6px;
     color: white;
     border-radius: 20px;
     background-color: rgb(14, 186, 230);
+    border-width: 2px;
+    border-color:rgb(14, 186, 230);
 }
 
 
@@ -34,6 +48,7 @@ defineProps({
     color:rgb(14, 186, 230);
     background-color: white;
     border-color:rgb(14, 186, 230);
+    
 }
 
 </style>

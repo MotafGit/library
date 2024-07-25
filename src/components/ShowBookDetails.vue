@@ -20,6 +20,7 @@ const overflowIntro = ref ('hidden');
 const hideButton = ref (false)
 const marginIntro = ref (0)
 
+
 const books = ref ({})
 
 const starStyle = {
@@ -42,6 +43,8 @@ const addToBasket = () => {
 watchEffect(() => {
     books.value = JSON.parse(props.booksObj)
 });
+
+
 
 </script>
 

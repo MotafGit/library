@@ -120,22 +120,26 @@ const verifica = () => {
         Others {{ books.genre }} you might like
     </div>
 
-    <div class="pt-5 grid md:grid-cols-3 sm:grid grid-cols-1 justify-items-center gap-6"  v-for="(genres, index) in genresDescription">
-        <div v-if="genres.type === books.genre" v-for="child in genres.bookList" class="bookFromGrid">
-           
+    <div  v-for="(genres, index) in genresDescription" class="ml-20 flex flex-row">
+        <div v-for="child in genres.bookList" class="pt-5 grid md:grid-cols-3 sm:grid grid-cols-1 justify-items-center gap-6" >
+            <div v-if="genres.type === books.genre" >
+                <div v-if="child.name !== books.name" class="bookFromGrid">
+            
 
-            <router-link 
-              :to="{
-                name: 'showBookDetails', 
-                params: { 
-                    booksObj:  JSON.stringify({...books})
-                        
-                    
-                } }">
-               <img class="" style="width:inherit; height:inherit" :src= child.image />
+                    <router-link 
+                    :to="{
+                        name: 'showBookDetails', 
+                        params: { 
+                            booksObj:  JSON.stringify({...books})
+                                
+                            
+                        } }">
+                    <img class="" style="width:inherit; height:inherit" :src= child.image />
 
-                </router-link> 
-         
+                        </router-link> 
+                </div>
+            
+            </div>
         </div>
 
 
@@ -161,6 +165,3 @@ const verifica = () => {
 
 
 </style>
-
-
-

@@ -5,6 +5,7 @@ import ShowBookDetails from '@/components/ShowBookDetails.vue'
 import debounce from 'lodash.debounce'
 
 import StarRating from 'vue-star-rating'
+import Button from '../components/Button.vue'
 
 
 import { ref, computed, watch, onUpdated, provide } from 'vue'
@@ -19,7 +20,16 @@ const cleansSearch = () => {
     
 }
 
+const selectedOption = ref (0);
+const filterOptions = ref([
+    { text: 'All Genres', value: 0 },
+    { text: 'Epic Fantasy', value: 1 },
+    { text: 'Comedy', value: 2 },
+    { text: 'Romance', value: 3 }
+])
+
 const filterByName = ref ([{}])
+const filteredBySelect = ref ([{}])
 
 const testArray = ref ([])
 const testeName = ref ('');
@@ -50,6 +60,20 @@ const addBook = (obj) => {
     }
     }); */ 
 
+
+    watch(selectedOption, (currentValue, oldValue) => {
+        filteredBySelect.value = []
+
+        bookList.value.forEach(element => { 
+            if (element.genre === filterOptions.value[selectedOption.value].text){
+                filteredBySelect.value.push(element)
+            }
+        })
+    
+    });
+
+
+
 watch(search, debounce(() => {
     
     filterByName.value.length = 0;
@@ -58,7 +82,7 @@ watch(search, debounce(() => {
         console.log(search.value)
     bookList.value.forEach(element => { 
         console.log (element.name)
-        if (element.name.includes(search.value)){
+        if (element.name.toUpperCase().includes(search.value.toUpperCase())){
             console.log ("entrou ca")
             filterByName.value.push(element)
     }
@@ -66,7 +90,7 @@ watch(search, debounce(() => {
     
     })}
 
-}, 2000));
+}, 100));
 
 
     
@@ -169,27 +193,31 @@ const bookList = ref( [
     </div>
     <div class="flex h-8" style="padding:1px; padding-top:9px;margin-bottom:9px ">
         <div class="sm:basis-1/12"></div>
-        <div>
+        <div class="pr-2" style="min-width:66px;">
             Filter by
         </div>
         <div class="">
-            <select v-model="selectFilter"></select>
+            <select v-model="selectedOption" class="border-2 border-black rounded-lg">
+                <option v-for="option in filterOptions" :value="option.value">
+                  {{ option.text }}
+                </option>
+              </select>
         </div>
         
-        <div class="w-full">
+        <div class="basis-full pr-2 pl-2">
             <input type="search" v-model="search" @click="cleansSearch()" class="rounded-lg searchBar w-full pl-2 border focus:border-2" style="border-color:black;" ></input>
         </div>
-        <div class="basis-1/12 ml-4">
-            <button @click="showNewBookMenu = true">
-                Add Book
-            </button>
+        <div class="" style="min-width:87px; ">
+            <Button message="Add Book" height="27" @click="showNewBookMenu = true" class="" style="">
+                
+            </Button>
         </div>
         <div class="sm:basis-1/12"></div>
         
     </div>
     <div>
       
-        <div v-if=" search == '' " class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" style="z-index:500">
+        <div v-if=" search == '' && selectedOption == 0" class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" style="z-index:500">
             <div class="" v-for="books in bookList" :key="books.id" >
               <router-link 
               :to="{
@@ -215,7 +243,7 @@ const bookList = ref( [
             </div>
             
         </div>
-        <div v-if=" search != '' && filterByName.length>0" class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+        <div v-if=" search != '' && filterByName.length>0 && selectedOption == 0" class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 " style="z-index:500">
             <div v-for="b in filterByName">
                 <div v-if="b.name != null" class="clickBook">
                   
@@ -225,15 +253,26 @@ const bookList = ref( [
                     </div>
                     <div class="text-center" style=""> <star-rating :rating="b.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
                 
+                </div>
             </div>
+        </div>
+        <div v-if="selectedOption > 0" class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" style="z-index:500">
+            <div v-for="filter in filteredBySelect">
+                <div class="clickBook">
+                  
+                    <div class="text-center text-nowrap titulo" style="max-width:135px;overflow:hidden">{{filter.name}}</div>
+                    <div class="booksBox">
+                        <img style="width:inherit; height:inherit" :src= filter.image />
+                    </div>
+                    <div class="text-center" style=""> <star-rating :rating="filter.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
+                
+                </div>
             </div>
         </div>
        
     </div>
     <div>
-        <button @click="checkPrime()">
-            abcsdds
-        </button>
+
     </div>
 
 </template>
