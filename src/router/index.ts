@@ -24,13 +24,13 @@ const router = createRouter({
       component: BooksView
     },
     {
-      path: '/showBooks/:booksObj',
-      name: 'showBookDetails',
+      path: '/showBooks/:booksObj/:bList',
+      name: 'ShowBookDetails',
       component: ShowBookDetails,
       props:true
     },
     {
-      path: '/genres/:booksObj1',
+      path: '/genres/:booksObj1/:bList',
       name: 'GenreDetails',
       component: GenreDetails,
       props:true

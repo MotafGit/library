@@ -6,13 +6,18 @@ import { ref, computed, watch, watchEffect } from 'vue'
 import StarRating from 'vue-star-rating'
 
 import Navbar from '../components/Navbar.vue'
+import { list } from 'postcss';
 
 const props = defineProps ({
 
    booksObj:{
     type: String,
     required: true,
-   } 
+   },
+   bList:{
+    type: String,
+    required: true,
+   }  
 })
 
 const expandIntro = ref (120);
@@ -38,10 +43,16 @@ const addWishList = () => {
 const addToBasket = () => {
     console.log ("por fazer")
 }
-
+const listOfBooks = ref ([{}])
 
 watchEffect(() => {
+    console.log ("entrou no showbookdetails")
     books.value = JSON.parse(props.booksObj)
+    listOfBooks.value = JSON.parse(props.bList)
+    console.log (props.bList)
+    console.log ("\n blabla \n")
+    console.log (listOfBooks.value)
+
 });
 
 
@@ -87,6 +98,7 @@ watchEffect(() => {
                             name: 'GenreDetails',
                             params: {
                             booksObj1: props.booksObj,
+                            bList: bList
                          } }" >
                         <span class="font-medium"> {{  books.genre }} </span>
                         </router-link>

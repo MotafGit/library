@@ -179,6 +179,59 @@ const bookList = ref( [
         reviewScore: 3.7,
         id: 6,
         intro:"To impress Julius Caesar, Queen Cleopatra promises to build the Roman Emperor a magnificent palace in just three months. Of course, Asterix has to get involved. By the time his feisty group from Gaul have finished, they’ve outwitted the Roman army, too."
+    },
+    {
+        name: "Beach Read",
+        author: "Emily Henry",
+        image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1589881197i/52867387.jpg",
+        genre: "Comedy",
+        reviewScore: 4.0,
+        id: 7,
+        intro:"A romance writer who no longer believes in love and a literary writer stuck in a rut engage in a summer-long challenge that may just upend everything they believe about happily ever afters. Augustus Everett is an acclaimed author of literary fiction. January Andrews writes bestselling romance. When she pens a happily ever after, he kills off his entire cast. They’re polar opposites. In fact, the only thing they have in common is that for the next three months, they’re living in neighboring beach houses, broke, and bogged down with writer’s block. Until, one hazy evening, one thing leads to another and they strike a deal designed to force them out of their creative ruts: Augustus will spend the summer writing something happy, and January will pen the next Great American Novel. She’ll take him on field trips worthy of any rom-com montage, and he’ll take her to interview surviving members of a backwoods death cult (obviously). Everyone will finish a book and no-one will fall in love. Really."
+    },
+    {
+        name: "Book Lovers",
+        author: "Emily Henry",
+        image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1638867089i/58690308.jpg",
+        genre: "Romance",
+        reviewScore: 4.13,
+        id: 8,
+        intro:"One summer. Two rivals. A plot twist they didn't see coming....Nora Stephens’ life is books—she’s read them all—and she is not that type of heroine. Not the plucky one, not the laidback dream girl, and especially not the sweetheart. In fact, the only people Nora is a heroine for are her clients, for whom she lands enormous deals as a cutthroat literary agent, and her beloved little sister Libby. Which is why she agrees to go to Sunshine Falls, North Carolina for the month of August when Libby begs her for a sisters’ trip away—with visions of a small-town transformation for Nora, who she’s convinced needs to become the heroine in her own story. But instead of picnics in meadows, or run-ins with a handsome country doctor or bulging-forearmed bartender, Nora keeps bumping into Charlie Lastra, a bookish brooding editor from back in the city. It would be a meet-cute if not for the fact that they’ve met many times and it’s never been cute. If Nora knows she’s not an ideal heroine, Charlie knows he’s nobody’s hero, but as they are thrown together again and again—in a series of coincidences no editor worth their salt would allow—what they discover might just unravel the carefully crafted stories they’ve written about themselves."
+    },
+    {
+        name: "The Hating Game",
+        author: "Sally Thorne",
+        image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1481566824i/27213238.jpg",
+        genre: "Romance",
+        reviewScore: 3.89,
+        id: 9,
+        intro:"Lucy Hutton and Joshua Templeman hate each other. Not dislike. Not begrudgingly tolerate. Hate. And they have no problem displaying their feelings through a series of ritualistic passive aggressive maneuvers as they sit across from each other, executive assistants to co-CEOs of a publishing company. Lucy can’t understand Joshua’s joyless, uptight, meticulous approach to his job. Joshua is clearly baffled by Lucy’s overly bright clothes, quirkiness, and Pollyanna attitude. Now up for the same promotion, their battle of wills has come to a head and Lucy refuses to back down when their latest game could cost her her dream job…But the tension between Lucy and Joshua has also reached its boiling point, and Lucy is discovering that maybe she doesn’t hate Joshua. And maybe, he doesn’t hate her either. Or maybe this is just another game."
+    },
+    {
+        name: "The Kiss Quotient",
+        author: "René Goscinny",
+        image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1688188444i/36199084.jpg",
+        genre: "Romance",
+        reviewScore: 3.7,
+        id: 10,
+        intro:"A heartwarming and refreshing debut novel that proves one thing: there's not enough data in the world to predict what will make your heart tick. Stella Lane thinks math is the only thing that unites the universe. She comes up with algorithms to predict customer purchases—a job that has given her more money than she knows what to do with, and way less experience in the dating department than the average thirty-year-old. It doesn't help that Stella has Asperger's and French kissing reminds her of a shark getting its teeth cleaned by pilot fish. Her conclusion: she needs lots of practice—with a professional. Which is why she hires escort Michael Phan. The Vietnamese and Swedish stunner can't afford to turn down Stella's offer, and agrees to help her check off all the boxes on her lesson plan—from foreplay to more-than-missionary position...Before long, Stella not only learns to appreciate his kisses, but to crave all the other things he's making her feel. Soon, their no-nonsense partnership starts making a strange kind of sense. And the pattern that emerges will convince Stella that love is the best kind of logic..."
+    },
+    {
+        name: "Bossypants",
+        author: "Tina Fey",
+        image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1481509554i/9418327.jpg",
+        genre: "Comedy",
+        reviewScore: 3.96,
+        id: 11,
+        intro:"To impress Julius Caesar, Queen Cleopatra promises to build the Roman Emperor a magnificent palace in just three months. Of course, Asterix has to get involved. By the time his feisty group from Gaul have finished, they’ve outwitted the Roman army, too."
+    },{
+        name: "Layover",
+        author: "Emily Henry",
+        image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1715590893i/60904334.jpg",
+        genre: "Romance",
+        reviewScore: 4.54,
+        id: 6,
+        intro:"Before Liz Lemon, before Weekend Update, before Sarah Palin, Tina Fey was just a young girl with a dream: a recurring stress dream that she was being chased through a local airport by her middle-school gym teacher. She also had a dream that one day she would be a comedian on TV. She has seen both these dreams come true. At last, Tina Fey's story can be told. From her youthful days as a vicious nerd to her tour of duty on Saturday Night Live; from her passionately halfhearted pursuit of physical beauty to her life as a mother eating things off the floor; from her one-sided college romance to her nearly fatal honeymoon—from the beginning of this paragraph to this final sentence. Tina Fey reveals all, and proves what we've all suspected: you're no one until someone calls you bossy."
     }
 ])
 </script>
@@ -221,9 +274,11 @@ const bookList = ref( [
             <div class="" v-for="books in bookList" :key="books.id" >
               <router-link 
               :to="{
-                name: 'showBookDetails', 
+                name: 'ShowBookDetails', 
                 params: { 
-                    booksObj:  JSON.stringify({...books})
+                    booksObj:  JSON.stringify({...books}),
+                    bList: JSON.stringify({...bookList}), 
+
                         
                     
                 } }">
@@ -244,29 +299,47 @@ const bookList = ref( [
             
         </div>
         <div v-if=" search != '' && filterByName.length>0 && selectedOption == 0" class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 " style="z-index:500">
-            <div v-for="b in filterByName">
-                <div v-if="b.name != null" class="clickBook">
-                  
-                    <div class="text-center text-nowrap titulo" style="max-width:135px;overflow:hidden">{{b.name}}</div>
-                    <div class="booksBox">
-                        <img style="width:inherit; height:inherit" :src= b.image />
-                    </div>
-                    <div class="text-center" style=""> <star-rating :rating="b.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
-                
+            <div v-for="books in filterByName">
+                <div v-if="books.name != null">
+                    <router-link 
+                        :to="{
+                        name: 'ShowBookDetails', 
+                        params: { 
+                            booksObj:  JSON.stringify({...books}),
+                            bList: JSON.stringify({...bookList}), 
+                        } }">
+                        <div class="clickBook">
+                            
+                                <div class="text-center text-nowrap titulo" style="max-width:135px;overflow:hidden">{{books.name}}</div>
+                                <div class="booksBox">
+                                    <img style="width:inherit; height:inherit" :src= books.image />
+                                </div>
+                                <div class="text-center" style=""> <star-rating :rating="books.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
+                        </div>
+                    </router-link> 
                 </div>
+
+            
             </div>
         </div>
         <div v-if="selectedOption > 0" class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" style="z-index:500">
-            <div v-for="filter in filteredBySelect">
+            <div v-for="books in filteredBySelect">
+                <router-link 
+                :to="{
+                name: 'ShowBookDetails', 
+                params: { 
+                    booksObj:  JSON.stringify({...books}),
+                    bList: JSON.stringify({...bookList}), 
+                } }">
                 <div class="clickBook">
-                  
-                    <div class="text-center text-nowrap titulo" style="max-width:135px;overflow:hidden">{{filter.name}}</div>
-                    <div class="booksBox">
-                        <img style="width:inherit; height:inherit" :src= filter.image />
-                    </div>
-                    <div class="text-center" style=""> <star-rating :rating="filter.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
-                
+                    
+                        <div class="text-center text-nowrap titulo" style="max-width:135px;overflow:hidden">{{books.name}}</div>
+                        <div class="booksBox">
+                            <img style="width:inherit; height:inherit" :src= books.image />
+                        </div>
+                        <div class="text-center" style=""> <star-rating :rating="books.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
                 </div>
+            </router-link> 
             </div>
         </div>
        
