@@ -244,9 +244,9 @@ const bookList = ref( [
     <div v-if="showNewBookMenu === true" style="position:sticky; z-index:1000">
         <NewBookForm @close="close" @addBook="addBook"></NewBookForm>
     </div>
-    <div class="flex h-8" style="padding:1px; padding-top:9px;margin-bottom:9px ">
+    <div class="flex h-8 items-center" style="padding:1px; padding-top:9px;margin-bottom:9px ">
         <div class="sm:basis-1/12"></div>
-        <div class="pr-2" style="min-width:66px;">
+        <div class="" style="min-width:90px;">
             Filter by
         </div>
         <div class="">
@@ -260,8 +260,8 @@ const bookList = ref( [
         <div class="basis-full pr-2 pl-2">
             <input type="search" v-model="search" @click="cleansSearch()" class="rounded-lg searchBar w-full pl-2 border focus:border-2" style="border-color:black;" ></input>
         </div>
-        <div class="" style="min-width:87px; ">
-            <Button message="Add Book" height="27" @click="showNewBookMenu = true" class="" style="">
+        <div class="" style="min-width:107px; ">
+            <Button message="Add Book" height="30" @click="showNewBookMenu = true" class="" style="">
                 
             </Button>
         </div>
