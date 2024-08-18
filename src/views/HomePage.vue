@@ -1,162 +1,20 @@
 <script setup lang="ts">
-import Navbar from '@/components/Navbar.vue'
-import Footer from '@/components/Footer.vue'
+import '.././style.css'
+import Navbar from '../components/Navbar.vue'
+import Footer from '../components/Footer.vue'
 
-import NewBookForm from '@/components/NewBookForm.vue'
-import ShowBookDetails from '@/components/ShowBookDetails.vue'
-import debounce from 'lodash.debounce'
+import UnderNav from '../components/UnderNav.vue'
+import MainPageBody from '../components/MainPageBody.vue'
+import { ref, computed, watch } from 'vue'
 
-import StarRating from 'vue-star-rating'
-import Button from '../components/Button.vue'
+const abc = ref (window.scrollY)
 
-
-import { ref, computed, watch, onUpdated, provide, onMounted } from 'vue'
- import { RouterLink, RouterView } from 'vue-router'
-
-const search = ref ('')
-const showNewBookMenu = ref (false)
-const selectFilter = ref ();
-const cleansSearch = () => {
-
-        search.value = "";
-    
-}
-
-const auxedBooks = ref ([])
-
-const selectedOption = ref (0);
-const filterOptions = ref([
-    { text: 'All Genres', value: 0 },
-    { text: 'Epic Fantasy', value: 1 },
-    { text: 'Comedy', value: 2 },
-    { text: 'Romance', value: 3 }
-])
-
-const auxTeste = ref ([])
-
-const filterByName = ref ([{}])
-const filteredBySelect = ref ([{}])
-
-const testArray = ref ([])
-const testeName = ref ('');
-
-onUpdated (() => {
-    console.log (bookList.value)
-})
-
-onMounted (() => {
-    console.log(bookList.value)
-})
-
-
-
-const close = () => {
-    showNewBookMenu.value= false
+const testaScroll = () => {
+  console.log (abc.value)
 }
 
 
-
-const addBook = (obj) => {
-    let teste = JSON.parse(JSON.stringify(obj))
-    console.log(teste)
-    teste.id = bookList.value.length + 1
-    auxedBooks.value.push(teste)
-
-
-    bookList.value.push(teste)
-    console.log (bookList);
-    //console.log(bookList)
-    close();
-
-}
-
-/* watch(search, (currentValue, oldValue) => {
-    if (search.value == 'Search' || search.value == ''){
-        filterByName.value.length = 0;
-    }
-    }); */ 
-
-
-watch(selectedOption, (currentValue, oldValue) => {
-    if (currentValue != oldValue){search.value= ''}
-    filteredBySelect.value = []
-    
-    if (search.value == ''){
-        bookList.value.forEach(element => { 
-            if (element.genre === filterOptions.value[selectedOption.value].text){
-                filteredBySelect.value.push(element)
-            }
-        })
-    }
-
-
-});
-
-
-
-watch(search, debounce(() => {
-    
-    filterByName.value.length = 0;
-    if ( search.value != '' ){
-        console.log ("entrou ca?????")
-        console.log(search.value)
-    bookList.value.forEach(element => { 
-        console.log (element.name)
-        if (element.name.toUpperCase().includes(search.value.toUpperCase()) || element.author.toUpperCase().includes(search.value.toUpperCase())){
-            console.log ("entrou ca")
-            filterByName.value.push(element)
-    }
-    
-    })}
-
-    if (search.value != '' && selectedOption.value != 0){
-        filteredBySelect.value = []
-        bookList.value.forEach(element => { 
-        console.log (element.name)
-        if (element.genre === filterOptions.value[selectedOption.value].text && (element.name.toUpperCase().includes(search.value.toUpperCase()) || element.author.toUpperCase().includes(search.value.toUpperCase()))){
-            filteredBySelect.value.push(element)
-        }
-        }
-    )}
-
-}, 100));
-
-
-
-
-    
-
-
-
-
-/* const genreDescr = computed ( () => {
-
-bookList.value.forEach(element => { 
-    testArray.value.push(element?.author); 
-})
-
-testArray.value.forEach(el => {
-    if (el.includes(search.value)){
-        filterByName.value.push(el)
-    }
-})
-    return filterByName
-});*/
-
-
-const checkPrime = () => {
-  //  bookList.value.forEach(element => { testArray.value.push(element?.author) })
-
-    //testArray.value.forEach ((el) => console.log(el))
-    filterByName.value.forEach((el) => console.log(el));
-
-    console.log (filterByName.value.length)
-    console.log (filterByName.value)
-
-}
-
-
-const bookList = ref( [
+const mainBookList = ref( [
     {
         name: "Harry Potter",
         author: "J.K. Rowling",
@@ -320,197 +178,110 @@ const bookList = ref( [
         intro:"A hockey player and a baker shoot their shot in this steamy new romance. When a very public breakup becomes a PR nightmare for Ian Chase's team, he hopes to focus on his game, but that suddenly seem less likely than a hat trick. With his career and the team’s image in jeopardy, Ian is surprised to find a solution through none other than Delilah Baker, his best friend and teammate's little sister…who isn’t so little anymore. Delilah Baker is known as “the darling of baking” on her local cable show, and being in the public eye is her bread and butter. But with her numbers dwindling and her producers turning up the heat, Delilah offers up the half-baked idea to collaborate with her brother’s team to entice the hockey fans of Boston to tune in to her show. Delilah thinks it will be a piece of cake—until the team sends Ian Chase, her brother’s best friend and the object of a decade-long crush that she’s never quite gotten over. Delilah's and Ian’s teams think it’s a true win-win situation—gaining higher numbers for Delilah’s show and casting Ian in a more positive light. And viewers are eating them up like a cupcake, sparking the idea to play up their relationship for the goal of good press. With more than just their careers on thin ice, the line between what’s real and what’s for show begins to blur, but one thing’s for certain: This PR stunt will either be a total game changer—or leave them both totally pucked."
     },
 ])
+
+
+const showRandom = computed (() => {
+  var i = 0;
+  var aux;
+  var randomInts: number [] = []
+  var returnedObjList: any[] = []
+  while (i<6){
+    aux = Math.floor(Math.random() * mainBookList.value.length) + 1
+    if(!randomInts.includes(aux) ){
+      randomInts.push(aux)
+      i++;
+    }
+  }
+  console.log(randomInts)
+
+  randomInts.forEach((number) => {
+    mainBookList.value.forEach((element) => {
+      if (element.id === number){
+        returnedObjList.push(element)
+      }
+    })
+  })
+
+  return returnedObjList
+})
+
+
+
+// function abola () =>   {
+
+
 </script>
 
 <template>
-    <div>
-        <Navbar></Navbar>
+
+    <Navbar></Navbar>
+    <div class="firstDiv" style="" >
+    <div style="" class="">
+      <img class="w-full" style="max-height:500px" src= "https://www.thehowe.org/wp-content/uploads/2023/02/Book-Banner.jpg"/>
     </div>
-
-    <div v-if="showNewBookMenu === true" style="position:sticky; z-index:1000">
-        <NewBookForm @close="close" @addBook="addBook"></NewBookForm>
+    <div class="flex justify-center w-full">
+      <div class="flex flex-row justify-center flex-wrap md:w-full" style="">
+          <div class="flex flex-col justify-center pr-3 md:w-96 pt-2" style="">
+            <div class="pb-1">
+              <b>Deciding what to read next?</b>
+            </div>
+            <div>
+              You’re in the right place. Tell us what titles or genres you’ve enjoyed in the past, and we’ll give you surprisingly insightful recommendations.
+            </div>
+          </div>
+        <div class="flex flex-col md:w-96 pt-2" style="">
+          <div class="pb-1">
+              <b>What are your friends reading?</b>
+            </div>
+            <div>
+              Chances are your friends are discussing their favorite (and least favorite) books on Filipe's library.
+            </div>
+        </div>
+      </div>
     </div>
-    <div class="firstDiv" style="position:relative; top:80px">
-        <div class="flex h-8 items-center" style="padding:1px; padding-top:9px;margin-bottom:9px ">
-            <div class="sm:basis-1/12"></div>
-            <div class="" style="min-width:90px;">
-                Filter by
-            </div>
-            <div class="">
-                <select v-model="selectedOption" class="border-2 border-black rounded-lg">
-                    <option v-for="option in filterOptions" :value="option.value">
-                    {{ option.text }}
-                    </option>
-                </select>
-            </div>
-            
-            <div class="basis-full pr-2 pl-2">
-                <input type="search" v-model="search" @click="cleansSearch()" class="rounded-lg searchBar w-full pl-2 border focus:border-2" style="border-color:black;" ></input>
-            </div>
-            <div class="" style="min-width:107px; ">
-                <Button message="Add Book" height="30" @click="showNewBookMenu = true" class="" style="">
-                    
-                </Button>
-            </div>
-            <div class="sm:basis-1/12"></div>
-            
-        </div>
-        <div>
+    <div class="flex justify-center pt-6">
+      <div style="width:960px; font-size:20px; font-weight:700">
+        Books you might like:
+      </div>
+    </div>
+    <div class="flex justify-center pt-2" style="">
+      
+      <div class="border border-blue grid lg:grid-cols-6 md:grid-cols-3 sm:grid-cols-2 justify-items-center p-3 lg:w-full" style="width:960px;background-color:beige">
         
-            <div v-if=" search == '' && selectedOption == 0" class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" style="z-index:500">
-                <div class="" v-for="books in bookList" :key="books.id" >
-                <router-link 
-                :to="{
-                    name: 'ShowBookDetails', 
-                    params: { 
-                        booksObj:  JSON.stringify({...books}),
-                        bList: JSON.stringify({...bookList}), 
+        <div v-for="filtered in showRandom" class="homePageBooks pt-1 pb-1" >
+          <router-link 
+              :to="{
+                  name: 'ShowBookDetails', 
+                  params: { 
+                      booksObj:  JSON.stringify({...filtered}),
+                      bList: JSON.stringify({...mainBookList})
+                  } }">
+              <img class="" style="width:-webkit-fill-available; height:-webkit-fill-available" :src= filtered.image />
 
-                            
-                        
-                    } }">
-
-                    
-
-                    <div class="clickBook">
-                    
-                            <div class="text-center text-nowrap titulo" style="max-width:135px;overflow:hidden">{{books.name}}</div>
-                            <div class="booksBox">
-                                <img style="width:inherit; height:inherit" :src= books.image />
-                            </div>
-                            <div class="text-center" style=""> <star-rating :rating="books.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
-                        
-                    </div>
-                    </router-link> 
-                </div>
-                
-            </div>
-            <div v-if=" search != '' && filterByName.length>0 && selectedOption == 0" class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 " style="z-index:500">
-                <div v-for="books in filterByName">
-                    <div v-if="books.name != null">
-                        <router-link 
-                            :to="{
-                            name: 'ShowBookDetails', 
-                            params: { 
-                                booksObj:  JSON.stringify({...books}),
-                                bList: JSON.stringify({...bookList}), 
-                            } }">
-                            <div class="clickBook">
-                                
-                                    <div class="text-center text-nowrap titulo" style="max-width:135px;overflow:hidden">{{books.name}}</div>
-                                    <div class="booksBox">
-                                        <img style="width:inherit; height:inherit" :src= books.image />
-                                    </div>
-                                    <div class="text-center" style=""> <star-rating :rating="books.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
-                            </div>
-                        </router-link> 
-                    </div>
-
-                
-                </div>
-            </div>
-            <div v-if="selectedOption > 0 && search == ''" class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" style="z-index:500">
-                <div v-for="books in filteredBySelect">
-                    <router-link 
-                    :to="{
-                    name: 'ShowBookDetails', 
-                    params: { 
-                        booksObj:  JSON.stringify({...books}),
-                        bList: JSON.stringify({...bookList}), 
-                    } }">
-                    <div class="clickBook">
-                        
-                            <div class="text-center text-nowrap titulo" style="max-width:135px;overflow:hidden">{{books.name}}</div>
-                            <div class="booksBox">
-                                <img style="width:inherit; height:inherit" :src= books.image />
-                            </div>
-                            <div class="text-center" style=""> <star-rating :rating="books.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
-                    </div>
-                </router-link> 
-                </div>
-            </div>
-
-    <!--  -->
-
-    <div v-if="selectedOption > 0 && search != ''" class="grid xl:grid-cols-4 gap-5 justify-items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1" style="z-index:500">
-                
-                <div v-for="books in filteredBySelect">
-                    
-                    <router-link 
-                    :to="{
-                    name: 'ShowBookDetails', 
-                    params: { 
-                        booksObj:  JSON.stringify({...books}),
-                        bList: JSON.stringify({...bookList}), 
-                    } }">
-                    <div class="clickBook">
-                        
-                            <div class="text-center text-nowrap titulo" style="max-width:135px;overflow:hidden">{{books.name}}</div>
-                            <div class="booksBox">
-                                <img style="width:inherit; height:inherit" :src= books.image />
-                            </div>
-                            <div class="text-center" style=""> <star-rating :rating="books.reviewScore" :round-start-rating="false" :star-size="25" :inline="true" :read-only="true"></star-rating></div>
-                    </div>
-                </router-link> 
-                </div>
-            </div>
-
-            <!--  -->
-        
-        </div>
-        <div>
+          </router-link> 
 
         </div>
-        <div class="footerClass">
-    <Footer></Footer>
-    </div>
-        
-    </div>
-    
-
-
-
-</template>
-
-
-<style>
-
-
-.vue-star-rating-rating-text{
-    margin-top:7px;
-}
-/*
-
-
-
-*/
-
-
-.searchBar{
-    outline: none;
-}
-
-.booksBox{
-    height:180px;
-    width:145px;
-    background-color: orange;
-
-}
-.titulo {
-    text-overflow: ellipsis;
-}
-.titulo:hover{
-    overflow: none;
-    text-wrap: wrap;
+      </div>
    
+    </div>
+  <div style="" class="footerClass">
+    <Footer></Footer>
+  </div>
+</div>
+
+  
+ 
+</template> 
+
+<style scoped>
+
+.teste{
+  color:blue;
 }
 
-.clickBook:hover{
-    cursor:pointer;
-}
-
-.clickBook{
-    text-align: -webkit-center;
+.homePageBooks{
+    height:180px;
+    width:130px;
 }
 
 </style>

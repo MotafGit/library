@@ -2,6 +2,9 @@
 
 
 import Navbar from '../components/Navbar.vue'
+import Footer from '../components/Footer.vue'
+
+
 import { ref, computed, watch, onUpdated, inject, watchEffect, shallowRef } from 'vue'
 
 
@@ -107,55 +110,63 @@ const verifica = () => {
 <template>
 
     <Navbar></Navbar>
-    <div class="pr-5 pl-5 pt-10">
-        {{ genreDescr }}
-    </div>
-    <div class="pt-5 pl-5">
-        Others {{ book.genre }} books you might like
-    </div>
-    <div class="pt-5 grid md:grid-cols-3 sm:grid grid-cols-1 justify-items-center gap-6">
-        <div v-for="filtered in filteredBooks" class="bookFromGrid" >
 
-            <router-link 
-                :to="{
-                    name: 'ShowBookDetails', 
-                    params: { 
-                        booksObj:  JSON.stringify({...filtered}),
-                        bList: bList
-                    } }">
-                <img class="" style="width:inherit; height:inherit" :src= filtered.image />
-
-            </router-link> 
-
+    <div class ="firstDiv" style="position:relative;top:80px;">
+        <div class="pr-5 pl-5 pt-10">
+            {{ genreDescr }}
         </div>
-</div>
+        <div class="pt-5 pl-5">
+            Others {{ book.genre }} books you might like
+        </div>
+        <div class="pt-5 grid md:grid-cols-3 sm:grid grid-cols-1 justify-items-center gap-6">
+            <div v-for="filtered in filteredBooks" class="bookFromGrid" >
 
-    <div  v-for="(genres, index) in genresDescription" class="ml-20 flex flex-row">
-        <div v-for="child in genres.bookList" class="pt-5 grid md:grid-cols-3 sm:grid grid-cols-1 justify-items-center gap-6" >
-            <div v-if="genres.type === book.genre" >
-                <div v-if="child.name !== book.name" class="bookFromGrid">
-                    <button @click="console.log(book)">teste</button>
-
-                    <router-link 
+                <router-link 
                     :to="{
                         name: 'ShowBookDetails', 
                         params: { 
-                            booksObj:  JSON.stringify({book}),
+                            booksObj:  JSON.stringify({...filtered}),
                             bList: bList
-                                
-                            
                         } }">
-                    <img class="" style="width:inherit; height:inherit" :src= child.image />
+                    <img class="" style="width:inherit; height:-webkit-fill-available" :src= filtered.image />
 
-                        </router-link> 
-                </div>
-            
+                </router-link> 
+
             </div>
-        </div>
+    </div>
+
+        <div  v-for="(genres, index) in genresDescription" class="ml-20 flex flex-row">
+            <div v-for="child in genres.bookList" class="pt-5 grid md:grid-cols-3 sm:grid grid-cols-1 justify-items-center gap-6" >
+                <div v-if="genres.type === book.genre" >
+                    <div v-if="child.name !== book.name" class="bookFromGrid">
+                        <button @click="console.log(book)">teste</button>
+
+                        <router-link 
+                        :to="{
+                            name: 'ShowBookDetails', 
+                            params: { 
+                                booksObj:  JSON.stringify({book}),
+                                bList: bList
+                                    
+                                
+                            } }">
+                        <img class="" style="width:inherit; height:inherit" :src= child.image />
+
+                            </router-link> 
+                    </div>
+                
+                </div>
+            </div>
 
 
 
-    </div> 
+        </div> 
+        <div style="" class="footerClass">
+        <Footer></Footer>
+    </div>
+    </div>
+
+
 
 
     
