@@ -5,7 +5,6 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-import StarRating from 'vue-star-rating'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faXmark, faAnglesDown } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +14,6 @@ library.add(faXmark, faAnglesDown)
 
 const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)
-app.component('star-rating', StarRating.default)
 app.use(createPinia())
 app.use(router)
 

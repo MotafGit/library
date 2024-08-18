@@ -3,7 +3,7 @@
 import { ref, computed, watch, watchEffect } from 'vue'
 
 
-import StarRating from 'vue-star-rating'
+
 
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'

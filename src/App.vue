@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import './style.css'
 import Navbar from './components/Navbar.vue'
-import Main from './views/main.vue'
+
 
 
 // function abola () =>   {

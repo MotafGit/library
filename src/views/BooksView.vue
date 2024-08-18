@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 
 import NewBookForm from '@/components/NewBookForm.vue'
-import ShowBookDetails from '@/components/ShowBookDetails.vue'
+// import ShowBookDetails from '@/components/ShowBookDetails.vue'
 import debounce from 'lodash.debounce'
 
 import StarRating from 'vue-star-rating'
