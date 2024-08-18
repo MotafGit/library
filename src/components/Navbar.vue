@@ -12,14 +12,14 @@ const changePos = ref (0);
 const interval = setInterval (myTeste,50)
 
 function myTeste () {
-    if (window.scrollY > 20){
-        navbarPosition.value = 'sticky'
+    if (window.scrollY > 1){
+        navbarPosition.value = 'fixed'
         inactiveButtonColors.value = 'blue'
         navbarBgColor.value = 'green'
         changePos.value = 0
     }
     else{
-        navbarPosition.value = 'relative'
+        navbarPosition.value = 'fixed'
         inactiveButtonColors.value = 'red'
         navbarBgColor.value = 'grey'
         changePos.value = 0
@@ -38,7 +38,7 @@ watch(windowY, (newValue, oldValue) => {
 
 <template>
 
-        <div class="h-16 bg-blue-400 flex flex-row w-full" :style="{position:navbarPosition, backgroundColor: navbarBgColor, top: changePos + 'px'} ">
+        <div class="h-16 bg-blue-400 flex flex-row w-full" :style="{position:navbarPosition, backgroundColor: navbarBgColor, top: changePos + 'px', zIndex:'600'} ">
             <div>
                 LOGO
             </div>

@@ -1,11 +1,11 @@
 import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
 import BooksView from '../views/BooksView.vue'
-import ShowBookDetails from '../components/ShowBookDetails.vue';
-import GenreDetails from '../components/GenreDetails.vue';
+import ShowBookDetails from '../views/ShowBookDetails.vue';
+import GenreDetails from '../views/GenreDetails.vue';
 
-import ShowBookView from '../views/ShowBookView.vue';
 
-import Main from '../main.vue'
+
+import HomePage from '../views/HomePage.vue'
 
 
 
@@ -14,8 +14,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'main',
-      component: Main
+      name: 'HomePage',
+      component: HomePage
 
     },
     {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import './style.css'
 import Navbar from './components/Navbar.vue'
-import Main from './main.vue'
+import Main from './views/main.vue'
 
 
 // function abola () =>   {
@@ -17,7 +17,30 @@ import Main from './main.vue'
         </div>
 </template> 
 
-<style scoped>
+<style>
+
+
+#app{
+        
+        min-height: 100vh;
+}
+
+#app .firstDiv{
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+}
+
+
+#app .footerClass{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: flex-end;
+        padding-top:20px;
+}
+
+
 
 
 
