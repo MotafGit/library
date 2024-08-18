@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import './style.css'
 import Navbar from './components/Navbar.vue'
-<<<<<<< HEAD
-
-=======
-import Main from './views/main.vue'
->>>>>>> b408a10556824f2f8f56e63a77ac15217d42f7d4
 
 
 // function abola () =>   {
