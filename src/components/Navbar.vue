@@ -17,13 +17,11 @@ function myTeste () {
         navbarPosition.value = 'fixed'
         inactiveButtonColors.value = 'white'
         navbarBgColor.value = '#b9b9b9'
-        changePos.value = 0
     }
     else{
         navbarPosition.value = 'fixed'
         inactiveButtonColors.value = 'black'
         navbarBgColor.value = 'transparent'
-        changePos.value = 0
         
     }
 }
@@ -38,7 +36,7 @@ function myTeste () {
 
 <template>
 
-        <div class="h-16 bg-blue-400 flex flex-row w-full" :style="{position:navbarPosition, backgroundColor: navbarBgColor, top: changePos + 'px', zIndex:'600'} ">
+        <div class="h-16 bg-blue-400 flex flex-row w-full" :style="{position:navbarPosition, backgroundColor: navbarBgColor, zIndex:'600'} ">
             <div>
                 LOGO
             </div>
