@@ -324,7 +324,7 @@ const bookList = ref( [
 
 <template>
     <div>
-        <Navbar></Navbar>
+        <Navbar style="borderBottom: 1px solid #ebebeb"></Navbar>
     </div>
 
     <div v-if="showNewBookMenu === true" style="position:sticky; z-index:1000">

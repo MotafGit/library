@@ -109,7 +109,7 @@ const verifica = () => {
 
 <template>
 
-    <Navbar></Navbar>
+    <Navbar style="borderBottom: 1px solid #ebebeb"></Navbar>
 
     <div class ="firstDiv" style="position:relative;top:80px;">
         <div class="pr-5 pl-5 pt-10">

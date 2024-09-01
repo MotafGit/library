@@ -5,6 +5,7 @@ import { ref, computed, watch } from 'vue'
 const inactiveButtonColors = ref ('red');
 const navbarPosition = ref ('relative');
 const navbarBgColor = ref ('grey');
+const borderNav = ref ('1 px solid black')
 const windowY = ref (window.scrollY)
 const changePos = ref (0);
 
@@ -14,22 +15,21 @@ const interval = setInterval (myTeste,50)
 function myTeste () {
     if (window.scrollY > 1){
         navbarPosition.value = 'fixed'
-        inactiveButtonColors.value = 'blue'
-        navbarBgColor.value = 'green'
+        inactiveButtonColors.value = 'white'
+        navbarBgColor.value = '#b9b9b9'
         changePos.value = 0
     }
     else{
         navbarPosition.value = 'fixed'
-        inactiveButtonColors.value = 'red'
-        navbarBgColor.value = 'grey'
+        inactiveButtonColors.value = 'black'
+        navbarBgColor.value = 'transparent'
         changePos.value = 0
+        
     }
 }
 
 
-watch(windowY, (newValue, oldValue) => {
 
-})
 
 
 

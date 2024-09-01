@@ -63,7 +63,7 @@ watchEffect(() => {
 <template>
 
 
-       <Navbar></Navbar>
+       <Navbar style="borderBottom: 1px solid #ebebeb"></Navbar>
        <div class="firstDiv" style="" >
         <div style="position:relative;top:80px;padding-bottom:20px">
                 <div class="booksView" style="padding-top:45px">
@@ -93,7 +93,7 @@ watchEffect(() => {
                             </button>
                         </div>
                         <div v-if="hideButton == true" class="pt-4 font-semibold"> {{books.intro}} </div>
-                        <div class="pt-4" >
+                        <div class="pt-4" style="padding-bottom:45px" >
                             Genres: 
                             <router-link
                             :to="{

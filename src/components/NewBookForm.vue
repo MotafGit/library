@@ -49,8 +49,8 @@ const close = () => {
 
 <template>
    
-<div class="flex justify-end" style="height:86vh;position:fixed; right:0px; top:130px;width:40%">
-    <div class="flex flex-col border-2 border-slate-500 pt-1 w-full" style="background-color:grey;min-width: 300px;max-width:600px; border-top-left-radius:20px;border-bottom-left-radius:20px;">
+<div class="flex justify-end" style="height:80%;position:fixed; right:0px; top:130px;width:40%;">
+    <div class="flex flex-col border-2 border-slate-500 pt-1 w-full" style="background-color: #d5d5d5;min-width: 300px;max-width:600px; border-top-left-radius:20px;border-bottom-left-radius:20px;">
         <div class="text-end pr-3">
             <button @click="close()">
                 <font-awesome-icon :icon="['fas', 'xmark']" />
@@ -143,6 +143,10 @@ const close = () => {
     .newBookInput{
         padding-left:5px;
     }
+
+    /* .bookForm{
+        
+    } */
     
 }
 .newBookInput:focus-visible{
