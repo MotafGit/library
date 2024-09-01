@@ -66,7 +66,7 @@ watchEffect(() => {
        <Navbar style="borderBottom: 1px solid #ebebeb"></Navbar>
        <div class="firstDiv" style="" >
         <div style="position:relative;top:80px;padding-bottom:20px">
-                <div class="booksView" style="padding-top:45px">
+                <div class="booksView" style="padding-top:45px;padding-bottom:45px">
                     <div class="flex flex-col items-end leftSide w-1/3" style="">
                         <div class="flex flex-col items-center"> 
                         <div class="bookCover">
